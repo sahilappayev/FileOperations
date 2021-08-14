@@ -1,9 +1,13 @@
 package com.example.Files;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -99,9 +103,23 @@ public class ExportDataExcel {
 
     private void writeHeaderLine(XSSFWorkbook workbook, XSSFSheet sheet) {
         Row headerRow = sheet.createRow(0);
+        sheet.setColumnWidth(0, 4000);
+        sheet.setColumnWidth(1, 4000);
+        sheet.setColumnWidth(2, 4000);
+        sheet.setColumnWidth(3, 5000);
         CellStyle headerCellStyle = workbook.createCellStyle();
         headerCellStyle.setFillForegroundColor(IndexedColors.YELLOW.index);
         headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        headerCellStyle.setBorderLeft(BorderStyle.MEDIUM);
+        headerCellStyle.setBorderBottom(BorderStyle.MEDIUM);
+        headerCellStyle.setBorderRight(BorderStyle.MEDIUM);
+        headerCellStyle.setBorderTop(BorderStyle.MEDIUM);
+        Font font = workbook.createFont();
+        font.setColor(Font.COLOR_RED);
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 13);
+        headerCellStyle.setFont(font);
+
         Cell headerCell = headerRow.createCell(0);
         headerCell.setCellStyle(headerCellStyle);
         headerCell.setCellValue("Name");
